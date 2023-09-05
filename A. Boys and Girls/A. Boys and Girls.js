@@ -1,5 +1,5 @@
-const { readFileSync, writeFileSync } = require("node:fs");
-const { join } = require("node:path");
+const { readFileSync, writeFileSync } = require("fs");
+const { join } = require("path");
 const input = readFileSync(join(__dirname, "input.txt")).toString("ascii");
 const nums = input.split(" ")
 
@@ -12,16 +12,18 @@ function main() {
     const letters = [];
 
 
+    const g = rec(letters, boys, girls).join("")
+    console.log(g);
+    writeFileSync(join(__dirname, "output.txt"), g)
 
-    writeFileSync(join(__dirname, "output.txt"), rec(letters, boys, girls).join(" "))
-    return true
 
 
 }
 main()
 
 function rec(l, b, g) {
-    if (shouldIInsertAB(l, b)) {
+
+    if (shouldIInsertAB(l, b, g)) {
         l.push("B")
         b--;
         return rec(l, b, g)
@@ -29,17 +31,24 @@ function rec(l, b, g) {
         l.push("G")
         g--;
         return rec(l, b, g)
-    } else {
-        return l;
     }
+    return l;
+
 }
 
 function shouldIInsertAB(l, b, g) {
     if (b === 0) return false;
 
-    const last_item = l[l.length - 1]
-    if (b > 0 && g === 0) return true
-    if (last_item === "B") return false;
+    if (l.length === 0) {
+        if (g < b || g == b) return true
+        else return false
+    }
+
+    if (l[l.length - 1] === "B") {
+        if (g === 0) return true;
+        else return false;
+    }
+
 
     return true;
 
@@ -48,9 +57,15 @@ function shouldIInsertAB(l, b, g) {
 
 function shouldIInsertAG(l, b, g) {
     if (g === 0) return false;
-    const last_item = l[l.length - 1]
-    if (g > 0 && b === 0) return true
-    if (last_item === "G") return false;
+    if (l.length === 0) {
+        if (g > b || g == b) return true
+        else return false
+    }
+    if (l[l.length - 1] === "G") {
+        if (b === 0) return true;
+        else return false;
+    }
+
 
     return true;
 
