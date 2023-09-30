@@ -26,7 +26,8 @@ rl.on("line", (line) => {
         });
         rows++;
         if (rows === 5) {
-            const list_of_steps = differenceBetween2Numbers(po["rows"], 2) +
+            const list_of_steps =
+                differenceBetween2Numbers(po["rows"], 2) +
                 differenceBetween2Numbers(2, po["columns"]);
             process.stdout.write(list_of_steps.toString());
             process.exit();
