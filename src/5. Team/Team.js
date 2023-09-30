@@ -12,7 +12,8 @@ let sureProblems = 0;
 rl.on("line", (line) => {
     if (typeof numberOfProblems === "undefined") {
         numberOfProblems = parseInt(line, 10);
-    } else if (line && list.length < numberOfProblems) {
+    }
+    else if (line && list.length < numberOfProblems) {
         const state = line
             .split(" ")
             .map((n) => parseInt(n, 10))

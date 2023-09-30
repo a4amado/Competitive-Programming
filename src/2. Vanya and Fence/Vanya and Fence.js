@@ -18,7 +18,8 @@ rl.on("line", (input) => {
             .map((e) => parseInt(e));
         numberOfFriends = n;
         heightOfTheFence = h;
-    } else if (heights.length === 0) {
+    }
+    else if (heights.length === 0) {
         heights = input
             .trim()
             .split(" ")
@@ -33,7 +34,8 @@ rl.once("close", () => {
         // @ts-ignore
         if (heights[index] > heightOfTheFence) {
             road_width += 2;
-        } else {
+        }
+        else {
             road_width++;
         }
     }

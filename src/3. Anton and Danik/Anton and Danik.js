@@ -12,7 +12,8 @@ rl.on("line", (line) => {
     if (typeof NumbersOfGamesPlayed === "undefined") {
         const num = parseInt(line, 10);
         NumbersOfGamesPlayed = num;
-    } else {
+    }
+    else {
         Winners = line.trim().split("");
         rl.close();
     }
@@ -28,9 +29,11 @@ rl.once("close", () => {
     });
     if (w["A"] > w["D"]) {
         process.stdout.write("Anton");
-    } else if (w["A"] < w["D"]) {
+    }
+    else if (w["A"] < w["D"]) {
         process.stdout.write("Danik");
-    } else {
+    }
+    else {
         process.stdout.write("Friendship");
     }
 });
