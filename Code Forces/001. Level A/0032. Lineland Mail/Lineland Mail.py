@@ -1,11 +1,11 @@
 number_of_cities = input()
 
-l_of_cities = [None for _ in range(int(number_of_cities))]
+l_of_cities = []
 
 cities = input().split(" ")
 
 for idx, element in enumerate(cities):
-    l_of_cities[int(idx)] = int(element)
+    l_of_cities.append(int(element))
 
 l_of_cities.sort()
 
