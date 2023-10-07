@@ -42,3 +42,6 @@
   - [ ] 0034. Snacktower
   - [x] 0035. A. Oath of the Night's Watch [A768]
   - [x] 0036. Pangram[A520]
+  - [x] 0037. Twins [A37]
+  - [x] 0038. Keyboard [A474]
+  - [ ]
