@@ -44,4 +44,5 @@
   - [x] 0036. Pangram[A520]
   - [x] 0037. Twins [A37]
   - [x] 0038. Keyboard [A474]
-  - [ ]
+  - [ ] 0039. Even Odds [A318]
+  - [ ] 0040. I Wanna Be the Guy [A469]
