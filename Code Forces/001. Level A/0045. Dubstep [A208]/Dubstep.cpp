@@ -21,7 +21,7 @@ int main() {
     remix.replace(remix.find("  "), 2, " ");
   }
 
-  cout << trim(remix.c_str()) << endl;
+  cout << trim(remix) << endl;
   return 0;
 }
 
