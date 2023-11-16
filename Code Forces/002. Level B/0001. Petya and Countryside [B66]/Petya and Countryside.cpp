@@ -22,8 +22,17 @@ int main()
         a[i] = check(heights, i, n);
     }
 
-    // TODO: write a function that get the highst last digit in the array, add 1 and print.
+     int high = 0;
 
+    for (int i = 0; i < n; i++)
+    {
+        if (a[i] >= high)
+        {
+            high = a[i];
+        }
+    }
+
+    cout << high + 1 << endl;
     return 0;
 }
 
