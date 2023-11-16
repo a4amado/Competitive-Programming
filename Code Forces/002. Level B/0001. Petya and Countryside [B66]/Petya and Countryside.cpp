@@ -31,7 +31,6 @@ int main()
             high = a[i];
         }
     }
-
     cout << high + 1 << endl;
     return 0;
 }
