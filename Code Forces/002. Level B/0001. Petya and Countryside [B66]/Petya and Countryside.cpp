@@ -3,6 +3,7 @@
 using namespace std;
 
 int check(int *list, int n, int length);
+
 int main()
 {
 
