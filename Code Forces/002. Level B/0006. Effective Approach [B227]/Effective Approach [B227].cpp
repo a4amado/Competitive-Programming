@@ -1,5 +1,4 @@
 #include <iostream>
-#include <map>
 
 using namespace std;
 
@@ -8,13 +7,11 @@ int main()
 
     int n;
     cin >> n;
-    map<int, int> dlll;
+    int l_1[n];
 
     for (int i = 0; i < n; i++)
     {
-        int k;
-        cin >> k;
-        dlll.insert(make_pair(k, i));
+        cin >> l_1[i];
     }
 
     int m;
@@ -28,15 +25,25 @@ int main()
     int g = 0;
     for (int i = 0; i < m; i++)
     {
-        int j = dlll[l_2[i]] + 1;
-        g += j;
+        for (int j = 0; j < n; i++)
+        {
+            g++;
+            if (l_2[i] == l_1[j]) {
+                break;
+            }
+        }
     }
 
     int b = 0;
-    for (int i = m; i > 0; i--)
+    for (int i = 0; i < m; i++)
     {
-       int j = (n) - (dlll[l_2[i]]);
-       b += j;
+        for (int j = n - 1; j >= 0; j--)
+        {
+            b++;
+            if (l_1[j] ==l_2[i]) {
+                break;
+            }
+        }
     }
 
     cout << g << " " << b << endl;

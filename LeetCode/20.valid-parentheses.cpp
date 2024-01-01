@@ -53,27 +53,6 @@ bool isValid(string s)
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         else if (i == s.size() - 1)
         {
             if (ss.size() > 1) { 
