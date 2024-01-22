@@ -91,7 +91,11 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "variant": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "xtree": "cpp",
+        "xstring": "cpp",
+        "queue": "cpp",
+        "xutility": "cpp"
     },
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.autoImportCompletions": true
