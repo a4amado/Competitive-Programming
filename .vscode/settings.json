@@ -95,8 +95,12 @@
         "xtree": "cpp",
         "xstring": "cpp",
         "queue": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "hash_map": "cpp",
+        "xhash": "cpp",
+        "xmemory": "cpp"
     },
     "python.analysis.typeCheckingMode": "basic",
-    "python.analysis.autoImportCompletions": true
+    "python.analysis.autoImportCompletions": true,
+    "java.debug.settings.onBuildFailureProceed": true
 }

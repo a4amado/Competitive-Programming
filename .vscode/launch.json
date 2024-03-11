@@ -6,6 +6,48 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Test",
+            "request": "launch",
+            "mainClass": "Test.Test",
+            "projectName": "Competitive-Programming_ed846fcb"
+        },
+        {
+            "type": "java",
+            "name": "test",
+            "request": "launch",
+            "mainClass": "Test.test",
+            "projectName": "Competitive-Programming_ed846fcb"
+        },
+        {
+            "type": "java",
+            "name": "Test",
+            "request": "launch",
+            "mainClass": "Test",
+            "projectName": "Competitive-Programming_ed846fcb"
+        },
+        {
+            "type": "java",
+            "name": "test",
+            "request": "launch",
+            "mainClass": "test",
+            "projectName": "Competitive-Programming_ed846fcb"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Competitive-Programming_ed846fcb"
+        },
+        {
+            "type": "java",
+            "name": "GFG",
+            "request": "launch",
+            "mainClass": "GFG",
+            "projectName": "Competitive-Programming_ed846fcb"
+        },
+        {
+            "type": "java",
             "name": "Index",
             "request": "launch",
             "mainClass": "Index",
