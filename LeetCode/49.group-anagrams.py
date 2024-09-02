@@ -20,4 +20,3 @@ class Solution:
                 mm[sorted_word].append(word)
         return list(mm.values())
 # @lc code=end
-

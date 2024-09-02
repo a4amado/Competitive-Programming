@@ -1,3 +1,7 @@
+# @lc code=start
+# Definition for a binary tree node.
+
+
 #
 # @lc app=leetcode id=100 lang=python
 #
@@ -20,19 +24,16 @@ class Solution(object):
         :rtype: bool
         """
 
-        # if of do not exist
         if not p and not q:
             return True
         
-        # if one exist
         if not p or not q:
             return False
-
+        
         if p.val != q.val:
             return False
         
-        return self.isSameTree(q.right, p.right) and self.isSameTree(q.left, p.left)
-        
+        return self.isSameTree(q.left, p.left) and self.isSameTree(q.right, p.right)
 
 
 # @lc code=end
