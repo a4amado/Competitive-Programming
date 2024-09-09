@@ -44,6 +44,8 @@ Feel free to reach out if you want to discuss a solution, suggest a problem, or 
 
 ## Note to Visitors
 
+
+
 While I appreciate you checking out my solutions, I encourage you to attempt the problems yourself first. The joy is in the solving!
 
-Happy Coding! 🚀
+![Longest Increasing Subsequence](https://github.com/a4addel/Competitive-Programming/blob/main/excalidraw/300.%20Longest%20Increasing%20Subsequence/300.%20Longest%20Increasing%20Subsequence.png?raw=true)
