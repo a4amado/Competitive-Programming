@@ -1,1 +1,0 @@
-pos_amound_numbers_of_the_same_type
