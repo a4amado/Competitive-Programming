@@ -1,0 +1,1 @@
+(target - position[idx]) // speed[idx]
