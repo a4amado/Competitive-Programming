@@ -17,4 +17,4 @@ class Solution:
         return max(dp)
 # @lc code=end
 s = Solution()
-s.lengthOfLIS([0,1,0,3,2,3])
+print(s.lengthOfLIS([0,1,0,3,2,3]))
