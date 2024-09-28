@@ -10,15 +10,25 @@ from typing import List
 
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        
-        curr = nums[0]
-        prev = 0
-
+        if len(nums) <= 2: return max(nums)
+        memo = {}
         # [1,2,3,1]
-        for val in nums[1:]:
-            new_max = prev + val
-            prev = curr
-            curr = max(new_max, curr)
-        return max(curr, prev)
+        dp = [0] * len(nums)
+        dp[0] = nums[0]
+        dp[1] = nums[1]
+        for idx in range(2, len(nums)):
+            dp [idx] = max(nums[idx] + dp[idx-2], nums[idx] + dp[idx-3])
 
+        # def dfs(i:int):
+        #     if i >= len(nums):return 0
+        #     if i in memo:return memo[i]
+        #     memo[i] = max(dfs(i+1), nums[i] + dfs(i+2))
+        #     return memo[i]
+        
+        # return dfs(0)
+        return max(dp)
+        
 # @lc code=end
+s = Solution()
+
+print(s.rob([1,2,3,1]))
