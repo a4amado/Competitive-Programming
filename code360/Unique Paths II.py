@@ -20,7 +20,7 @@ def mazeObstacles(n: int, m:int, mat: List[List[int]]):
             if mat[rdx][cdx] == -1:
                 continue
             else:
-                dp[rdx][cdx] = (dp[rdx - 1][cdx] + dp[rdx][cdx - 1]) % MOD
+                dp[rdx][cdx] = (max(0,dp[rdx - 1][cdx]) + max(0, dp[rdx][cdx - 1])) % MOD
 
 
     return dp[-1][-1]
