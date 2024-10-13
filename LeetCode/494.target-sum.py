@@ -3,39 +3,28 @@ from typing import List
 class Solution:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
         total = sum(nums)
-        
-        # If the target is unreachable, return 0
-        if abs(target) > total or (total + target) % 2 != 0:
-            return 0
-        
-        # Calculate the sum we need to achieve with positive numbers
-        target_sum = (total + target) // 2
-        
-        # Memoization dictionary
         memo = {}
+
+
+        def power(idx: int, currSum: int):
+            if idx == len(nums):
+                if currSum == target: return 1
+                return 0
+
+            if (idx, currSum) in memo: return memo[(idx, currSum)]
+
+            ss = 0
+            if nums[idx] <= target - currSum:
+                ss += power(idx+1, currSum + nums[idx])
+            
+            ss += power(idx+1, currSum )
+            memo[(idx, currSum)] = ss
+            return memo[(idx, currSum)]
+            
         
-        def dfs(index: int, current_sum: int) -> int:
-            # Base cases
-            if index == len(nums):
-                return 1 if current_sum == target_sum else 0
-            
-            # Check if this state has been computed before
-            if (index, current_sum) in memo:
-                return memo[(index, current_sum)]
-            
-            # Recursive cases
-            # Don't add the current number
-            count = dfs(index + 1, current_sum)
-            
-            # Add the current number if possible
-            if current_sum + nums[index] <= target_sum:
-                count += dfs(index + 1, current_sum + nums[index])
-            
-            # Memoize the result
-            memo[(index, current_sum)] = count
-            return count
-        
-        return dfs(0, 0)
+        return power(0, 0)
+
+
 
 # Test the solution
 s = Solution()

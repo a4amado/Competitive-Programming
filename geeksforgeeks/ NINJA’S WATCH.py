@@ -1,3 +1,6 @@
+
+
+
 from typing import List
 
 def ninjaWatch(time: str) -> str:

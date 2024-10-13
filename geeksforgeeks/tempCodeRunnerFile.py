@@ -1,9 +1,12 @@
-n = 9
-m = 10
-edges=[[0,1],[0,3],[3,4],[4,5],[5,6],[1,2],[2,6],[6,7],[7,8],[6,8]] 
-src=0
 
-s = Solution()
-print(
-    s.shortestPath(edges, n, m, src)
-)
+from typing import List,Dict
+from heapq import heappop, heappush
+
+class Solution:
+    def MinimumEffort(self, rows : int, columns : int, heights : List[List[int]]) -> int:
+        diffs = [[float('inf') for i in range(columns)] for _ in range(rows)]
+        diffs[0][0] = float('-inf')
+        q = []
+        q.append([0, (0,0)])
+        while q:
+            diff, (row, col) = heappop(q)
