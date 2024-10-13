@@ -1,33 +1,32 @@
-
 class Solution:
     def isMatch(self, text: str, pattern: str) -> bool:
-            
         wildcard = "*"
         singular = "?"
-        memo = {}
 
-        def d(idx:int, jdx: int):
-            if idx == len(pattern) and jdx == len(text):
-                return True
-            if idx == len(pattern):
-                return False
-            if jdx == len(text):
-                return all(char == wildcard for char in pattern[idx:])
+        # dp table, initialize all as False initially
+        dp = [[False] * (len(text) + 1) for _ in range(len(pattern) + 1)]
 
-            key = (idx, jdx)
-            if key in memo: return memo[key]
-            
+        # Base case: empty pattern and empty text is a match
+        dp[0][0] = True
 
-            currChar = text[jdx]
-            currpattern = pattern[idx]
+        # Base case: when text is empty but pattern is not, check for wildcard '*'
+        for idx in range(1, len(pattern) + 1):
+            if pattern[idx - 1] == wildcard:
+                dp[idx][0] = dp[idx - 1][0]  # '*' can match empty text
 
-            if currpattern == singular:
-                memo[key] = d(idx+1, jdx+1)
-            elif wildcard == currpattern:
-                memo[key] = d(idx+1, jdx) or d(idx, jdx+1)
-            else:
-                memo[key] = currpattern == currChar and d(idx + 1, jdx + 1)
-            
-            
-            return memo[key]
-        return d(0,0)
+        # Fill the DP table from top-left to bottom-right
+        for idx in range(1, len(pattern) + 1):
+            for jdx in range(1, len(text) + 1):
+                currpattern = pattern[idx - 1]
+                currChar = text[jdx - 1]
+
+                if currpattern == singular:
+                    dp[idx][jdx] = dp[idx - 1][jdx - 1]
+                elif currpattern == wildcard:
+                    dp[idx][jdx] = dp[idx - 1][jdx] or dp[idx][jdx - 1]
+                else:
+                    dp[idx][jdx] = currpattern == currChar and dp[idx - 1][jdx - 1]
+
+        # The result will be stored in dp[len(pattern)][len(text)], meaning the entire pattern matches the entire text
+        return dp[len(pattern)][len(text)]
+          
