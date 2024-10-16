@@ -1,0 +1,28 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+from typing import *
+
+def checkMeta(str1: str, str2: str):
+    str1 = str1.lower()
+    str2 = str2.lower()
+    if len(str1) != len(str2):return False
+
+    if Counter(str1) != Counter(str2) :return False
+
+    numberOfDiff =  0 
+    for i in range(len(str1)):
+        if str1[i] != str2[i]:
+            numberOfDiff += 1
+    if numberOfDiff != 2:return False
+    return True
+
+print(checkMeta("Codeing", "Codenig"))
+print(checkMeta("zqkvx", "zqknx"))
+print(checkMeta("sspddqtxxw", "sspddqogxw"))
+print(checkMeta("dqzvp", "zqdvp"))
+
+
+
+

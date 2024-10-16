@@ -1,62 +1,64 @@
-from os import *
-from sys import *
-from collections import *
-from math import *
+class UnionFind:
+    def __init__(self, n):
+        self.parent = [i for i in range(n)]
+        self.rank = [0] * n
 
+    # Find the root of the set containing node u, with path compression
+    def find(self, u):
+        if self.parent[u] != u:
+            self.parent[u] = self.find(self.parent[u])
+        return self.parent[u]
 
-def findLCS(n: int, m: int, a: str, b: str) -> str:
+    # Union the sets containing u and v, with union by rank
+    def union(self, u, v):
+        root_u = self.find(u)
+        root_v = self.find(v)
 
-	
-    dp_table = [[0 for _ in range(len(a) +1 )] for _ in range(len(b)+ 1)]
-
-    for i in range(1, len(dp_table)):
-        for j in range(1, len(dp_table[0])):
-            if a[j -1] == b[i -1]:
-                dp_table[i][j] = dp_table[i -1][j -1]  + 1
+        if root_u != root_v:
+            # Union by rank to keep the tree flat
+            if self.rank[root_u] > self.rank[root_v]:
+                self.parent[root_v] = root_u
+            elif self.rank[root_u] < self.rank[root_v]:
+                self.parent[root_u] = root_v
             else:
-                dp_table[i][j] = max(dp_table[i -1][j], dp_table[i][j -1])
-
-    y, x = m,n
-
-    s = []
-
-    while y > 0 and x > 0:
-        if b[y - 1] == a[x - 1]:
-            s.append(b[y-1])
-            y,x = y-1,x-1
-            continue
-
-        above = (dp_table[y-1][x], (y-1, x))
-        left = (dp_table[y][x-1], (y,x-1))
-
-        nextItem = max(above, left)
-        y = nextItem[1][0]
-        x = nextItem[1][1]
-
-    return "".join(reversed(s))
+                self.parent[root_v] = root_u
+                self.rank[root_u] += 1
+            return True
+        return False
 
 
-str1 = "ABCBDAB"
-str2 = "BDCABA"
+def kruskal(n, edges):
+    # Initialize the union-find data structure for n nodes
+    uf = UnionFind(n)
+    
+    # Sort edges by weight
+    edges.sort(key=lambda x: x[2])
+
+    mst = []
+    mst_cost = 0
+
+    # Iterate through the sorted edges
+    for u, v, weight in edges:
+        # Check if adding this edge forms a cycle
+        if uf.union(u, v):
+            mst.append((u, v, weight))
+            mst_cost += weight
+
+    return mst, mst_cost
 
 
+# Example usage:
+# n is the number of nodes, edges is a list of tuples (u, v, weight)
+n = 4
+edges = [
+    (0, 1, 10),
+    (0, 2, 6),
+    (0, 3, 5),
+    (1, 3, 15),
+    (2, 3, 4)
+]
 
-print(
-    findLCS(0,0,str1, str2)
-)
+mst, mst_cost = kruskal(n, edges)
 
-str1 = "brute" 
-str2  = "groot"
-
-
-print(
-    findLCS(0,0,str1, str2)
-)
-str1 = "ababa"
-str2  = "cbbcad"
-
-
-
-print(
-    findLCS(0,0,str1, str2)
-)
+print("Edges in the Minimum Spanning Tree:", mst)
+print("Total cost of the Minimum Spanning Tree:", mst_cost)

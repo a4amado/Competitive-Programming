@@ -38,3 +38,5 @@ graph = {
     'H': {'G': -1},
     'I': {'H': -1, 'A': -1}
 }
+
+print(bellman_ford(graph, "B"))
