@@ -22,16 +22,16 @@ class Solution:
                 l[0] = i
                 break
 
-        parents = {i: [] for i in range(n)}
+        # parents = {i: [] for i in range(n)}
         
         # Build parent-child relationships
-        for i in range(len(l) - 1, -1, -1):
-            if l[i] == -1: 
-                continue
-            parentIdx = (i - 1) // 2
-            if parentIdx < 0: 
-                continue
-            parents[l[i]].append(l[parentIdx])
+        # for i in range(len(l) - 1, -1, -1):
+        #     if l[i] == -1: 
+        #         continue
+        #     parentIdx = (i - 1) // 2
+        #     if parentIdx < 0: 
+        #         continue
+        #     parents[l[i]].append(l[parentIdx])
 
         # Count nodes with no parents and nodes with more than one parent
         # noParents = 0
@@ -67,3 +67,4 @@ class Solution:
 
         # Ensure all nodes are visited (fully connected)
         return len(visited) == n
+
