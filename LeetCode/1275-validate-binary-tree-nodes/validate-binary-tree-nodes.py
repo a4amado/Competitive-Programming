@@ -34,18 +34,18 @@ class Solution:
             parents[l[i]].append(l[parentIdx])
 
         # Count nodes with no parents and nodes with more than one parent
-        noParents = 0
-        moreThanOneParent = 0
+        # noParents = 0
+        # moreThanOneParent = 0
         
-        for node in parents.values():
-            if len(node) == 0:
-                noParents += 1
-            if len(node) > 1:
-                moreThanOneParent += 1
+        # for node in parents.values():
+        #     if len(node) == 0:
+        #         noParents += 1
+        #     if len(node) > 1:
+        #         moreThanOneParent += 1
 
-        # There should be exactly one root and no node should have more than one parent
-        if noParents != 1 or moreThanOneParent > 0:
-            return False
+        # # There should be exactly one root and no node should have more than one parent
+        # if noParents != 1 or moreThanOneParent > 0:
+        #     return False
 
         # Check for cycles using DFS
         visited = set()
