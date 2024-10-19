@@ -12,24 +12,28 @@ class Solution:
         if not root:
             return []
         
-        to_delete_set = set(to_delete)
+        to_delete_set = set(to_delete)  # Convert the list to a set for O(1) lookups
         forest = []
-        
+
         def dfs(node: Optional[TreeNode], is_root: bool) -> Optional[TreeNode]:
             if not node:
                 return None
             
-            # Check if the current node should become a new root
+            # Check if the current node is to be deleted
             root_deleted = node.val in to_delete_set
+            
+            # If the node is not deleted and is a root (either original root or new root), add it to the forest
             if is_root and not root_deleted:
                 forest.append(node)
             
-            # Recurse on left and right children
-            node.left = dfs(node.left, root_deleted)
-            node.right = dfs(node.right, root_deleted)
+            # Recur on the left and right children
+            node.left = dfs(node.left, root_deleted)   # If the current node is deleted, its children become new roots
+            node.right = dfs(node.right, root_deleted) # If the current node is deleted, its children become new roots
             
-            # If the current node is deleted, return None to "cut" it from the tree
+            # Return None if the node is deleted, meaning it is removed from the tree
             return None if root_deleted else node
         
+        # Start DFS with the root, considering it as the root of the tree
         dfs(root, True)
+        
         return forest
