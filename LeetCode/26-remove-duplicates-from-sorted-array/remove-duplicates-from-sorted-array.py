@@ -1,17 +1,22 @@
+# @lc code=start
 class Solution(object):
     def removeDuplicates(self, nums):
         """
         :type nums: List[int]
         :rtype: int
         """
-        nums.sort()
-        uniqie = set()
-        for idx, item in enumerate(nums):
-            uniqie.add(item)
-        nums_ = [x for x in uniqie]
-        for i in range(len(nums) - len(uniqie)):
-            nums_.append("_")
-        nums_.sort()
-        for i in range(len(nums_)):
-            nums[i] = nums_[i]
-        return len(uniqie)
+        
+        
+        done = set()
+        newArray = []
+        for i in nums:
+            if i not in done:
+                newArray.append(i)
+                done.add(i)
+        
+        for i in range(len(nums)):
+            if i < len(newArray):
+                nums[i] = newArray[i]
+            else:
+                nums[i] = '_'
+        return len(newArray)
