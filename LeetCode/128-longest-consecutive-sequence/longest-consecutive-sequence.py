@@ -12,20 +12,30 @@ class Solution:
             return 0
             
         num_set = set(nums)
+        visited = set()
         max_sequence = 0
         
-        for num in num_set:
+        for num in nums:
             # Only start counting if this is the start of a sequence
             # (i.e., num-1 is not in the set)
-            if num - 1 not in num_set:
-                current_num = num
-                current_streak = 1
+            if num not in visited:
+                visited.add(num)
+                currunt_streak = 1
+
+                going_downward = num - 1
+                going_forward = num + 1
+
+                while going_downward in num_set:
+                    visited.add(going_downward)
+                    currunt_streak += 1
+                    going_downward -= 1
+
+                while going_forward in num_set:
+                    visited.add(going_forward)
+                    currunt_streak += 1
+                    going_forward += 1
+                    
+
+                max_sequence = max(max_sequence, currunt_streak)
                 
-                # Count consecutive numbers
-                while current_num + 1 in num_set:
-                    current_num += 1
-                    current_streak += 1
-                
-                max_sequence = max(max_sequence, current_streak)
-        
         return max_sequence
