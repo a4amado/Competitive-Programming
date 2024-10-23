@@ -16,7 +16,6 @@ class Solution:
         efforts[0][0] = 0
         
         # Priority queue to store (effort, row, col)
-        # Using effort as priority ensures we process paths with minimum effort first
         pq = [(0, 0, 0)]  # (effort, row, col)
         
         while pq:
@@ -38,13 +37,16 @@ class Solution:
                 if not (0 <= new_row < rows and 0 <= new_col < cols):
                     continue
                 
-                # Calculate new effort for this step
-                new_effort = max(curr_effort, 
-                               abs(heights[row][col] - heights[new_row][new_col]))
-                
+                new_effort = max(curr_effort, abs(heights[row][col] - heights[new_row][new_col]))
+
+                if efforts[new_row][new_col] == float('inf'):
+                    efforts[new_row][new_col] = new_effort
+                    heapq.heappush(pq, (new_effort, new_row, new_col))
+                    continue
+
                 # If we found a better path to the adjacent cell
                 if new_effort < efforts[new_row][new_col]:
                     efforts[new_row][new_col] = new_effort
                     heapq.heappush(pq, (new_effort, new_row, new_col))
         
-        return efforts[-1][-1]  # Should never reach here if graph is connected
+        return efforts[-1][-1]
