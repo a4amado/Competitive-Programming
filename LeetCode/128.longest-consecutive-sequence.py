@@ -1,4 +1,3 @@
-
 #
 # @lc app=leetcode id=128 lang=python3
 #
@@ -8,17 +7,39 @@ from typing import List
 
 # @lc code=start
 class Solution:
-  def longestConsecutive(self, nums: List[int]) -> int:
-        unique = set(nums)
-        longest = 0
-        for i in unique:
-            if (i - 1) not in  unique:
-                length = 0
-                while i + length in unique:
-                    length = length + 1
-                longest = max(length, longest)
+    def longestConsecutive(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+            
+        num_set = set(nums)
+        visited = set()
+        max_sequence = 0
+        
+        for num in nums:
+            # Only start counting if this is the start of a sequence
+            # (i.e., num-1 is not in the set)
+            if num not in visited:
+                visited.add(num)
+                currunt_streak = 1
 
-        return longest
+                going_downward = num - 1
+                going_forward = num + 1
 
+                while going_downward in num_set:
+                    visited.add(going_downward)
+                    currunt_streak += 1
+                    going_downward -= 1
 
-# @lc code=end
+                while going_forward in num_set:
+                    visited.add(going_forward)
+                    currunt_streak += 1
+                    going_forward += 1
+                    
+
+                max_sequence = max(max_sequence, currunt_streak)
+                
+        return max_sequence
+    
+# Consider this array: [5,6,7,  2,3,4]
+sol = Solution()
+sol.longestConsecutive([5,6,7,  2,3,4])
