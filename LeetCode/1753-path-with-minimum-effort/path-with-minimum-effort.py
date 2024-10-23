@@ -39,10 +39,6 @@ class Solution:
                 
                 new_effort = max(curr_effort, abs(heights[row][col] - heights[new_row][new_col]))
 
-                if efforts[new_row][new_col] == float('inf'):
-                    efforts[new_row][new_col] = new_effort
-                    heapq.heappush(pq, (new_effort, new_row, new_col))
-                    continue
 
                 # If we found a better path to the adjacent cell
                 if new_effort < efforts[new_row][new_col]:
