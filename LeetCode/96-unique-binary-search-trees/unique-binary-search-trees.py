@@ -8,8 +8,11 @@ class Solution:
         for i in range(2, n + 1):
             l = 0
             r = i - 1
-            while r >= 0:  # Loop until r becomes -1
-                dp[i] += dp[l] * dp[r]
+            while l <= r:  # Loop until r becomes -1
+                if r == l:
+                    dp[i] += (dp[l] * dp[r])
+                else:
+                    dp[i] += (dp[l] * dp[r]) * 2
                 l += 1
                 r -= 1
 
