@@ -3,16 +3,16 @@
 #
 # [1929] Concatenation of Array
 #
+from typing import List
 
 # @lc code=start
 class Solution(object):
-    def getConcatenation(self, nums):
+    def getConcatenation(self, nums: List[int]):
         """
         :type nums: List[int]
         :rtype: List[int]
         """
-        for i in range(len(nums)):
-            nums.append(nums[i])
+        nums.extend(nums)
         return nums
 # @lc code=end
 

@@ -6,14 +6,12 @@
 from typing import List
 
 
+from collections import Counter
 # @lc code=start
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        d = {}
-        for i in range(len(nums)):
-            if nums[i] in d:
-                d[nums[i]] += 1
-            else:
-                d[nums[i]] = 1
-        return int(max(d, key=lambda k: d[k]))
+        count = Counter(nums)
+        l = list(count)
+        l.sort(key=lambda x:x[1], reverse=True)
+        return l[0][0]
 # @lc code=end

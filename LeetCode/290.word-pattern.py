@@ -7,44 +7,29 @@
 # @lc code=start
 from typing import Dict, List
 
+from collections import defaultdict
 
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
-        patterns: Dict[str, List[int]] = {}
-        ss = s.split(" ")
+        map = defaultdict(set)
+        map_word = defaultdict(set)
 
-        if len(ss) != len(pattern):
-            return False
-        for i, c in enumerate(pattern):
-            if patterns.get(str(c)):
-                patterns[str(c)].append(i)
-            else:
-                patterns[str(c)] = [i]
+        words = s.split(" ")
+        if len(pattern) != len(words): return False
         
-        already_used_words = set()
-        for i, item in enumerate(patterns):
-            l= patterns.get(item, [])
-            ll = [ss[x] for x in l]
-            # is all strings the same
-            
-            
-            # [start] all words in  patterns are the same
-            a = {}
-            for i in ll:
-                a[i] = True
-            if len(a) > 1:
-                return False
-            # [end] all words in  patterns are the same
+        for idx in range(len(pattern)):
+            map[pattern[idx]].add(words[idx])
+            map_word[words[idx]].add(pattern[idx])
 
+        for _, words in map.items():
+            if len(words) != 1: return False
 
-            # [start] this words hs be already used bt other pattern
-            if ll[0] in already_used_words:
-                return False
-            already_used_words.add(ll[0])
-            # [end] this words hs be already used bt other pattern
+        for _, words in map_word.items():
+            if len(words) != 1: return False
+
         return True
 
-# s = Solution()
-# print(s.wordPattern("abba", "dog cat cat dog"))
+s = Solution()
+print(s.wordPattern("abba", "dog cat cat dog"))
 # @lc code=end
-l
+
