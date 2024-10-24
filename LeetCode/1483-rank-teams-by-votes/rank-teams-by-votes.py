@@ -1,3 +1,4 @@
+import functools
 from typing import *
 from collections import defaultdict
 
@@ -22,6 +23,7 @@ class Solution:
             for pos in range(1, len(votes[0]) + 1):
                 if ranks[a][pos] != ranks[b][pos]:
                     return ranks[b][pos] - ranks[a][pos]
+                
             return ord(a) - ord(b)  # If all positions tie, sort alphabetically
         
         # Sort teams using the custom comparison
