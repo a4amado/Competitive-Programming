@@ -24,7 +24,7 @@ class Solution:
         # Iterate through grid2
         for row in range(rows):
             for col in range(cols):
-                if grid2_copy[row][col] == 1:
+                if grid2_copy[row][col] == grid2_copy[row][col] == 1:
                     # Get the island from grid2
                     grid2_island = set()
                     getIsland(row, col, grid2_copy, grid2_island)
