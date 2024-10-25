@@ -3,18 +3,29 @@
 #
 # [1512] Number of Good Pairs
 #
+from typing import *
+from collections import Counter
+
 
 # @lc code=start
 class Solution(object):
-    def numIdenticalPairs(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        dic = 0
-        for i in range(len(nums)):
-            for j in range(len(nums) - 1, i, -1):
-                if nums[i] == nums[j]:
-                    dic = dic + 1
-        return dic
+    def numIdenticalPairs(self, nums: List[int]) -> int:
+        count = Counter(nums)
+        def n(i: int):
+            return i * (i-1) / 2
+        num = 0
+        for val in count.values():
+            num += n(val)
+        return int(num)
+        
+        
 # @lc code=end
+
+
+nums = [1,2,3,1,1,3]
+
+sol = Solution()
+print(sol.numIdenticalPairs(nums))
+
+nums = [1,1,1,1]
+print(sol.numIdenticalPairs(nums))
