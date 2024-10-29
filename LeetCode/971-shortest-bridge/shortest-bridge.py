@@ -1,56 +1,54 @@
-from typing import List, Deque
+# @lc app=leetcode id=934 lang=python3
+#
+# [934] Shortest Bridge
+#
+from typing import List, Deque, Dict
 from collections import deque
 
+# @lc code=start
 class Solution:
     def shortestBridge(self, grid: List[List[int]]) -> int:
-        directions = [(1,0), (-1,0), (0,1), (0,-1)]
-        n = len(grid)
+        directons = [(1,0),(-1,0),(0,1), (0,-1)]
         q: Deque[tuple[int, int]] = deque([])
         visited = set()
 
-        def dfs(row: int, col: int):
-            if not(0 <= row < n and 0 <= col < n): return
-            if (row, col) in visited or grid[row][col] != 1: return
-            
-            visited.add((row, col))
+        def dfs(row: int, col: int, q: Deque[tuple[int, int]]):
+            if not(0 <= row < len(grid) and 0 <= col < len(grid[0])):return
+            if (row, col) in visited:return
+            if grid[row][col] != 1: return
             q.append((row, col))
-            
-            for dy, dx in directions:
-                dfs(row + dy, col + dx)
+            visited.add((row, col))
+            for dy, dx in directons:
+                dfs(row + dy, col + dx, q)
 
-        # Find first island using DFS
-        found_first = False
-        for r in range(n):
-            if found_first: break
-            for c in range(n):
-                if grid[r][c] == 1:
-                    dfs(r, c)
-                    found_first = True
+        # Find first island
+        found = False
+        for rdx, row in enumerate(grid):
+            if found: break
+            for cdx, col in enumerate(row):
+                if col == 1:
+                    dfs(rdx, cdx, q)
+                    found = True
                     break
 
-        # BFS to find shortest path to second island
-        distance = 0
+        # BFS to second island
+        level = 0
         while q:
             for _ in range(len(q)):
                 row, col = q.popleft()
                 
-                for dy, dx in directions:
-                    new_row, new_col = row + dy, col + dx
+                for dy, dx in directons:
+                    new_row = row + dy
+                    new_col = col + dx
+                    if not (0 <= new_row < len(grid) and 0 <= new_col < len(grid[0])): continue
+                    if (new_row, new_col) in visited: continue
                     
-                    if not (0 <= new_row < n and 0 <= new_col < n):
-                        continue
-                    
-                    if (new_row, new_col) in visited:
-                        continue
-                        
-                    # Found the second island
+                    # Found second island
                     if grid[new_row][new_col] == 1:
-                        return distance
+                        return level
                         
                     visited.add((new_row, new_col))
                     q.append((new_row, new_col))
-            
-            distance += 1
-            
-        return distance
-
+            level += 1
+        
+        return -1
