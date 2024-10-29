@@ -21,6 +21,7 @@ public:
         {
             has.insert({edges[i][1], 1});
         }
+        
         vector<int> res;
 
         for (auto i = 0; i < n; ++i)

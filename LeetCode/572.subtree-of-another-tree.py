@@ -3,7 +3,7 @@
 #
 # [572] Subtree of Another Tree
 #
-from typing import Optional
+from typing import *
 
 
 class TreeNode:
@@ -21,22 +21,29 @@ class TreeNode:
 #         self.right = right
 class Solution:
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-        if not root:
-            return False
-        if self.check(root, subRoot):
-            return True
-        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
+        def serialize(node: Optional[TreeNode]):
+            if not node:
+                return "null"
+            # Using string formatting with unique markers to avoid false matches
+            return f"#{node.val}#{serialize(node.left)}#{serialize(node.right)}"
+            
+        def getSubtrees(node: Optional[TreeNode], subtrees: set):
+            if not node:
+                return "null"
+            # Create serialization for current subtree
+            curr = f"#{node.val}#{getSubtrees(node.left, subtrees)}#{getSubtrees(node.right, subtrees)}"
+            # Add current subtree to set
+            subtrees.add(curr)
+            return curr
 
-    def check(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-        if not root and not subRoot:
-            return True
-        if not root or not subRoot:
-            return False
-        if root.val != subRoot.val:
-            return False
-        return self.check(root.left, subRoot.left) and self.check(root.right, subRoot.right)
-
+        # Get all possible subtree serializations from root
+        subtrees = set()
+        getSubtrees(root, subtrees)
         
+        # Check if subRoot serialization exists in our subtrees
+        target = serialize(subRoot)
+        return target in subtrees
+
         
 
         
