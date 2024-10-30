@@ -7,23 +7,13 @@
 # @lc code=start
 class Solution(object):
     def findDisappearedNumbers(self, nums):
-        nums.sort()
-        i = 0
-        should_be = 1
-        l = []
-        while i < len(nums):
-            if nums[i] == should_be:
-                i = i + 1
-                should_be = should_be + 1
-            elif nums[i] > should_be:
-                l.append(should_be)
-                should_be = should_be + 1
-            else:
-                i = i + 1
-        while should_be <= len(nums):
-            l.append(should_be)
-            should_be = should_be + 1
-        return l
+        unique = set(nums)
+        
+        for i in range(1, len(nums) + 1):
+            if i not in unique:unique.add(i)
+            else:unique.remove(i)
+        return list(unique)
+
 
 # @lc code=end
 
