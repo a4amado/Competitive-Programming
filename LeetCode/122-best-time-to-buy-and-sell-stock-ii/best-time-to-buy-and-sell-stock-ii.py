@@ -2,33 +2,24 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        # Initialize memoization dictionary
-        memo = {}
+        n = len(prices)
+        if n == 0:
+            return 0
         
-        def recursion(idx: int, holding: bool) -> int:
-            # Base case: if we've reached the end of the array
-            if idx >= len(prices):
-                return 0
-            
-            # If we've seen this state before, return memoized result
-            if (idx, holding) in memo:
-                return memo[(idx, holding)]
-            
-            # Skip this day (always a valid choice)
-            skip = recursion(idx + 1, holding)
-            
-            if holding:
-                # If we're holding stock, we can sell
-                # Profit = current price + future profits
-                sell = prices[idx] + recursion(idx + 1, False)
-                memo[(idx, holding)] = max(skip, sell)
-            else:
-                # If we're not holding stock, we can buy
-                # Cost = -current price + future profits
-                buy = -prices[idx] + recursion(idx + 1, True)
-                memo[(idx, holding)] = max(skip, buy)
-                
-            return memo[(idx, holding)]
+        # Create arrays to track max profit with and without holding stock
+        # curr[0] is profit without stock, curr[1] is profit while holding
+        curr = [0, -prices[0]]  # Initial state
         
-        # Start recursion from day 0, not holding any stock
-        return recursion(0, False)
+        # Fill the dp table
+        for i in range(1, n):
+            prev_no_stock = curr[0]
+            prev_with_stock = curr[1]
+            
+            # If not holding stock on day i, either keep not holding or sell
+            curr[0] = max(prev_no_stock, prev_with_stock + prices[i])
+            
+            # If holding stock on day i, either keep holding or buy
+            curr[1] = max(prev_with_stock, prev_no_stock - prices[i])
+        
+        # Return max profit without holding stock on last day
+        return curr[0]
