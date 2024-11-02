@@ -7,23 +7,25 @@ from typing import List
 
 # @lc code=start
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        hash_map = {}
+        uniqie = set()
         curr = headA
         while curr:
-            hash_map[hash(curr)] = 1
+            uniqie.add(curr.val)
             curr = curr.next
+
         curr = headB
+        ans = None
         while curr:
-            if hash(curr) in hash_map:
-                return curr
+            if curr.val in uniqie:
+                ans = curr
             curr = curr.next
-        return None
+        return ans
 # @lc code=end
 

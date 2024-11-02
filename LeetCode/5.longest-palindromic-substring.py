@@ -7,40 +7,25 @@
 # @lc code=start
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        if len(s) == 0:
-            return ""
-        if len(s) == 1:
-            return s
-        def expand_arndound_the_center(l: int, r: int):
+        s1 = s
+        s2 = s[::-1]
 
-            if l < 0 or r >= len(s):
-                return ""
-            if not s[l] == s[r]:
-                return ""
+        length = len(s) + 1
 
-            terminate = False
+        dp = [[0 for _ in range(length) ] for _ in range(length)]
 
-            while l >= 0 and l < len(s)  and not terminate:
-                new_r = r + 1
-                new_l = l - 1
+        maxVal = 0
+        position = (0, 0)
+        for i in range(1, length):
+            for j in range(1, length):
+                if s1[i-1] == s2[j-1]:
+                    dp[i][j] = dp[i-1][j-1] + 1
+                    if dp[i][j] > maxVal:
+                        maxVal = dp[i][j]
+                        position = (i -1, j-1)
+        return s[position[0] - maxVal + 1 : position[0] + 1]
 
-                if new_l >= 0 and new_r < len(s) and s[new_l] == s[new_r]:
-                    l = new_l
-                    r = new_r
-                else:
-                    terminate = True
-
-            return s[l:r+1]
-
-        curr = ""
-        for i in range(len(s) - 1):
-            if len(curr) == len(s):
-                return s
-            odd = expand_arndound_the_center(i , i)
-            even = expand_arndound_the_center(i , i + 1)
-            
-            curr = max([curr, odd, even], key=len)
-        return curr
+        
         
 # @lc code=end
 
