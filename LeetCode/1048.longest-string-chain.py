@@ -14,7 +14,7 @@ class Solution:
                 prev = word[:i] + word[i+1:]
                 
                 # If the predecessor exists, update the chain length
-                if prev in dp:
+                if prev in words:
                     dp[word] = max(dp[word], dp[prev] + 1)
             
         

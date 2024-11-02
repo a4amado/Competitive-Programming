@@ -6,7 +6,7 @@ class Solution:
         if len(nums) <= 1:
             return nums
         
-        nums.sort()
+        # nums.sort()
         n = len(nums)
         
         # `dp` will hold the length of the largest subset ending at each index
@@ -20,7 +20,7 @@ class Solution:
         # Fill dp array and track the indices for backtracking
         for i in range(n):
             for j in range(i):
-                if nums[i] % nums[j] == 0 and dp[j] + 1 > dp[i]:
+                if nums[i] > nums[j] and dp[j] >= dp[i]:
                     dp[i] = dp[j] + 1
                     prev[i] = j
             
@@ -45,5 +45,5 @@ print(sol.largestDivisibleSubset(nums))
 nums = [3, 17]
 print(sol.largestDivisibleSubset(nums))
 
-nums = [4, 8, 10, 240]
+nums = [240, 4, 8, 10]
 print(sol.largestDivisibleSubset(nums))
