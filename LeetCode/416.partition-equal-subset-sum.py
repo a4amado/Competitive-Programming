@@ -12,6 +12,9 @@ class Solution:
         target = total_sum // 2
         memo = {}
         
+
+
+
         def backtracking(i: int, currSum: int):
             if currSum == target:
                 return True
@@ -32,7 +35,7 @@ class Solution:
 
             return False
 
-        return backtracking(0, 0)
+        # return backtracking(0, 0)
 
 
 s = Solution()
